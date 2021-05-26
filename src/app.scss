@@ -1,7 +1,64 @@
-.color-square {
-  width: 100px;
-  height: 100px;
-}
 .guessed-color {
   background-color: #aaaaaa;
+}
+
+.guesser-container {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  max-width: 400px;
+  & .color-container {
+    display: flex;
+    & .color-square {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      & p {
+        color: #00000080;
+        padding: 2px;
+        border-radius: 2px;
+        background-color: #ffffff60;
+        margin: 0;
+        position: absolute;
+        left: 2px;
+        top: 2px;
+      }
+      & button {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 4px;
+        border: none;
+        background-color: #fff;
+        box-shadow: 0 0 2px #000;
+      }
+    }
+  }
+}
+.result-container {
+  display: flex;
+  flex-direction: column;
+  & progress {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 250px;
+    height: 20px;
+  }
+  & .restart-button-box {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    & button {
+      width: 50%;
+      border: none;
+      cursor: pointer;
+      &:hover {
+        background-color: #65f0e8;
+      }
+    }
+  }
 }
