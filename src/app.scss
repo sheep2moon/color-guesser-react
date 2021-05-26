@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+$main-color: #7dd8c7;
+$second-color: #f5ffc3;
+
+* {
+  box-sizing: border-box;
+  font-family: 'Odibee Sans', cursive;
+}
+
 .guessed-color {
   background-color: #aaaaaa;
 }
@@ -10,12 +19,16 @@
   height: 100vh;
   width: 100%;
   max-width: 400px;
+  border-radius: 10px;
   & .color-container {
     display: flex;
     & .color-square {
       width: 200px;
       height: 200px;
       position: relative;
+      border: 1px solid #00000010;
+      margin: 10px 2px;
+      border-radius: 10px;
       & p {
         color: #00000080;
         padding: 2px;
@@ -23,8 +36,8 @@
         background-color: #ffffff60;
         margin: 0;
         position: absolute;
-        left: 2px;
-        top: 2px;
+        left: 5px;
+        top: 5px;
       }
       & button {
         position: absolute;
@@ -40,25 +53,56 @@
 }
 .result-container {
   display: flex;
-  flex-direction: column;
-  & progress {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 250px;
-    height: 20px;
-  }
-  & .restart-button-box {
+  & .progress-bar {
+    width: 300px;
     height: 30px;
+    background-color: #00000010;
     display: flex;
-    justify-content: center;
-    margin: 10px 0;
-    & button {
-      width: 50%;
-      border: none;
-      cursor: pointer;
-      &:hover {
-        background-color: #65f0e8;
+    align-items: center;
+    justify-content: flex-start;
+
+    & .progress-fill {
+      height: 26px;
+      border-top-right-radius: 13px;
+      border-bottom-right-radius: 13px;
+      background-color: $main-color;
+      display: flex;
+      align-items: center;
+      & p {
+        color: white;
+        margin: 0 5px;
       }
+    }
+  }
+
+  & button {
+    width: 100px;
+    height: 100%;
+    border: none;
+    background-color: $second-color;
+    cursor: pointer;
+    &:hover {
+      background-color: $main-color;
+    }
+  }
+}
+.input-container {
+  margin: 10px 0;
+  width: 100%;
+  height: 30px;
+  & input {
+    width: 300px;
+    height: 100%;
+    border: 1px solid #00000020;
+  }
+  & button {
+    width: 100px;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    background-color: $second-color;
+    &:hover {
+      background-color: $main-color;
     }
   }
 }

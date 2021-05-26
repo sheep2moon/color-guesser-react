@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import './app.scss';
+import ProgressBar from './components/ProgressBar';
 
 function App() {
   const colorValueRef = useRef();
   const [randomColor, setRandomColor] = useState();
   const [guessedColor, setGuessedColor] = useState();
   const [result, setResult] = useState(0);
-  const [error, setError] = useState(null);
 
   const newRandom = () => {
     const red = Math.floor(Math.random() * 255)
@@ -34,7 +34,7 @@ function App() {
   const handleCheck = () => {
     let guessedValue = colorValueRef.current.value;
     if (guessedValue.length > 6 || guessedValue.length < 6) {
-      setError('Color value must be 6 characters');
+      return;
     } else {
       setGuessedColor(guessedValue);
       const rdiff =
@@ -47,7 +47,7 @@ function App() {
         parseInt(randomColor.slice(4, 6), 16) -
         parseInt(guessedValue.slice(4, 6), 16);
 
-      setResult(755 - (Math.abs(rdiff) + Math.abs(gdiff) + Math.abs(bdiff)));
+      setResult(765 - (Math.abs(rdiff) + Math.abs(gdiff) + Math.abs(bdiff)));
     }
   };
 
@@ -72,18 +72,23 @@ function App() {
           </div>
         </div>
 
-        <div className='result-container'>
-          <label htmlFor='result'>score: </label>
-          <progress id='result' value={result} max='765'></progress>
-          <div className='restart-button-box'>
-            {result ? <button onClick={handleRestart}>Try again</button> : ''}
-          </div>
-        </div>
         <div className='input-container'>
-          {error ? <p>{error}</p> : ''}
-          <input type='text' ref={colorValueRef} placeholder='ex. de49a5' />
+          <input
+            type='text'
+            ref={colorValueRef}
+            placeholder='enter hex value ex. 45a3b0'
+          />
           <button onClick={handleCheck}>Check</button>
         </div>
+        {result ? (
+          <div className='result-container'>
+            <ProgressBar result={result} />
+
+            <button onClick={handleRestart}>Try again</button>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );
