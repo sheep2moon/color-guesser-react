@@ -26,10 +26,10 @@ function App() {
     newRandom();
   }, []);
   const handleRestart = () => {
-    setResult(0);
+    console.log(result);
+    setResult(null);
     newRandom();
     setGuessedColor('aaaaaa');
-    colorValueRef.current.value = '';
   };
   const handleCheck = () => {
     let guessedValue = colorValueRef.current.value;
@@ -52,43 +52,51 @@ function App() {
   };
 
   return (
-    <div className='App'>
-      <div className='guesser-container'>
-        <h1>Color Guesser</h1>
-        <div className='color-container'>
-          <div
-            className='random-color color-square'
-            style={{ backgroundColor: `#${randomColor}` }}
-          >
-            {result ? <p>{`#${randomColor}`}</p> : <p>#??????</p>}
-            <button onClick={newRandom}>Change color</button>
-          </div>
-
-          <div
-            className='guessed-color color-square'
-            style={{ backgroundColor: `#${guessedColor}` }}
-          >
-            {result ? <p>{`#${guessedColor}`}</p> : <p>#??????</p>}
-          </div>
-        </div>
-
-        <div className='input-container'>
-          <input
-            type='text'
-            ref={colorValueRef}
-            placeholder='enter hex value ex. 45a3b0'
-          />
-          <button onClick={handleCheck}>Check</button>
-        </div>
-        {result ? (
+    <div className='main-container'>
+      <div className='app-card'>
+        <div className='guesser-container'>
+          <h1>Color Guesser</h1>
           <div className='result-container'>
             <ProgressBar result={result} />
-
-            <button onClick={handleRestart}>Try again</button>
           </div>
-        ) : (
-          ''
-        )}
+          <div className='color-container'>
+            <div
+              className='random-color color-square'
+              style={{ backgroundColor: `#${randomColor}` }}
+            >
+              {result ? (
+                <p>{`#${randomColor}`}</p>
+              ) : (
+                <div>
+                  {' '}
+                  <p>#??????</p>{' '}
+                  <button onClick={newRandom}>Change color</button>{' '}
+                </div>
+              )}
+            </div>
+
+            <div
+              className='guessed-color color-square'
+              style={{ backgroundColor: `#${guessedColor}` }}
+            >
+              {result ? <p>{`#${guessedColor}`}</p> : <p>#??????</p>}
+            </div>
+          </div>
+          <div className='first-row'>
+            {!result ? (
+              <div className='input-container'>
+                <input
+                  type='text'
+                  ref={colorValueRef}
+                  placeholder='enter hex value ex. 45a3b0'
+                />
+                <button onClick={handleCheck}>Check</button>
+              </div>
+            ) : (
+              <button onClick={handleRestart}>Try again</button>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
